@@ -10,7 +10,7 @@ export default function App() {
       <div>
         <Sidebar />
       </div>
-      <div>
+      <div className="flex-1">
         <Navbar />
         <Outlet />
       </div>
