@@ -33,7 +33,7 @@ export default function Navbar() {
         </button>
       </form>
       <div className="flex gap-4">
-        <div
+        {/* <div
           onClick={onAddBlog}
           className="rounded-full px-4 py-2 flex justify-center items-center gap-2 cursor-pointer bg-red-500 text-white hover:bg-red-600 font-semibold"
         >
@@ -41,7 +41,7 @@ export default function Navbar() {
             <IoMdAdd />
           </div>
           Add Blog
-        </div>
+        </div> */}
         <div className="text-2xl rounded-full cursor-not-allowed border border-gray-200 p-2">
           <FcManager />
         </div>

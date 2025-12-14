@@ -5,7 +5,7 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./pages/Dashboard.jsx";
 import AddBlogFormPage from "./pages/BlogAddForm/AddBlogFormPage.jsx";
-import BlogsPage from "./pages/BlogsPage.jsx";
+import BlogsPage from "./pages/BlogsPage/Blogs.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 const router = createBrowserRouter([

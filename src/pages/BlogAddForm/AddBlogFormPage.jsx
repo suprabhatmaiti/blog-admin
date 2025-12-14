@@ -42,7 +42,7 @@ export default function AddBlogFormPage() {
     const blogData = { ...formData };
 
     if (blogData.publish) {
-      blogData.publishDate = new Date().toISOString().toString().split("T")[0];
+      blogData.publishDate = new Date().toISOString();
     }
     console.log(blogData);
 
@@ -62,9 +62,9 @@ export default function AddBlogFormPage() {
 
     localStorage.setItem("blogs", JSON.stringify([...blogs, newBlog]));
     initialData.current = formData;
-    // setFormData(initialState);
-    // setImageError("");
-    // alert("Blog saved successfully");
+    setFormData(initialState);
+    setImageError("");
+    alert("Blog saved successfully");
   };
 
   return (
