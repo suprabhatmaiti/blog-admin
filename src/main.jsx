@@ -4,8 +4,9 @@ import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./pages/Dashboard.jsx";
-import AddBlogFormPage from "./pages/AddBlogFormPage.jsx";
+import AddBlogFormPage from "./pages/BlogAddForm/AddBlogFormPage.jsx";
 import BlogsPage from "./pages/BlogsPage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/add-blog",
         element: <AddBlogFormPage />,
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
   },
