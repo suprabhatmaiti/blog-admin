@@ -1,4 +1,14 @@
 import React from "react";
+import Dropdown from "../../components/common/Dropdown";
+
+const CATEGORY_OPTIONS = [
+  "Technology",
+  "Arts",
+  "Sports",
+  "Music",
+  "Cinemas",
+  "Politics",
+];
 
 export default function PublishingDetails({
   publish = false,
@@ -20,12 +30,12 @@ export default function PublishingDetails({
             Category
           </label>
           <div className="p-1">
-            <input
-              type="text"
+            <Dropdown
               name="category"
               value={category}
-              className="w-full border border-gray-200 text-gray-600 font-semibold px-2 rounded-lg "
+              options={CATEGORY_OPTIONS}
               onChange={onChange}
+              className="w-full"
             />
           </div>
         </div>

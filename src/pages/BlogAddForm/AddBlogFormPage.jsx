@@ -18,6 +18,7 @@ const initialState = {
 export default function AddBlogFormPage() {
   const [formData, setFormData] = useState(initialState);
   const [imageError, setImageError] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
   const initialData = useRef(initialState);
 
   const isFormChanged =
@@ -37,34 +38,41 @@ export default function AddBlogFormPage() {
   };
 
   const handleSave = () => {
-    const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+    setIsSaving(true);
+    try {
+      const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
 
-    const blogData = { ...formData };
+      const blogData = { ...formData };
 
-    if (blogData.publish) {
-      blogData.publishDate = new Date().toISOString();
+      if (blogData.publish) {
+        blogData.publishDate = new Date().toISOString();
+      }
+
+      const validationError = VerifyFormFields(blogData);
+      if (validationError) {
+        alert(validationError);
+        return;
+      }
+
+      const newBlog = {
+        ...blogData,
+        id: new Date().getTime().toString(),
+        isDeleted: false,
+        deletedAt: null,
+        createdAt: new Date().toISOString().toString().split("T")[0],
+      };
+
+      localStorage.setItem("blogs", JSON.stringify([...blogs, newBlog]));
+      initialData.current = formData;
+      setFormData(initialState);
+      setImageError("");
+      alert("Blog saved successfully");
+    } catch (error) {
+      console.error("Failed to save blog:", error);
+      alert("Failed to save blog. Please try again.");
+    } finally {
+      setIsSaving(false);
     }
-    console.log(blogData);
-
-    const validationError = VerifyFormFields(blogData);
-    if (validationError) {
-      alert(validationError);
-      return;
-    }
-
-    const newBlog = {
-      ...blogData,
-      id: new Date().getTime().toString(),
-      isDeleted: false,
-      deletedAt: null,
-      createdAt: new Date().toISOString().toString().split("T")[0],
-    };
-
-    localStorage.setItem("blogs", JSON.stringify([...blogs, newBlog]));
-    initialData.current = formData;
-    setFormData(initialState);
-    setImageError("");
-    alert("Blog saved successfully");
   };
 
   return (
@@ -82,7 +90,7 @@ export default function AddBlogFormPage() {
           </button>
           <button
             onClick={handleSave}
-            disabled={!isFormChanged}
+            disabled={!isFormChanged || isSaving}
             className="rounded-full px-4 py-2 flex justify-center items-center gap-2 cursor-pointer bg-red-500 text-white hover:bg-red-600 font-semibold disabled:cursor-not-allowed disabled:bg-gray-500 "
           >
             <FaRegSave />
