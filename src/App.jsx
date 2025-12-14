@@ -6,11 +6,11 @@ import Sidebar from "./components/layout/Sidebar";
 
 export default function App() {
   return (
-    <div className="flex">
+    <div>
       <div>
         <Sidebar />
       </div>
-      <div className="flex-1">
+      <div className="md:ml-64">
         <Navbar />
         <Outlet />
       </div>
