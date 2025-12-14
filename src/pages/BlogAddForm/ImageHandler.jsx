@@ -4,7 +4,6 @@ import { validateImage, fileToBase64 } from "../../utils/ImageUtils";
 
 export default function ImageHandler({ value, onChange, error, setError }) {
   const handleImageChange = async (e) => {
-    console.log(e.target.files[0]);
     const file = e.target.files[0];
     const validationError = validateImage(file);
     if (validationError) {
@@ -50,7 +49,6 @@ export default function ImageHandler({ value, onChange, error, setError }) {
             <p className="text-sm text-slate-600 font-medium">
               Click to upload
             </p>
-            <p className="text-xs text-slate-400 mt-1">or drag and drop</p>
             <input
               type="file"
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer "

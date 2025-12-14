@@ -6,12 +6,10 @@ export default function PublishingDetails({
   category,
   onChange,
   author,
-  date,
 }) {
   const togglePublishStatus = () => {
     setPublish(!publish);
   };
-  console.log(new Date().toISOString().toString().split("T")[0]);
 
   return (
     <div>

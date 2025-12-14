@@ -3,6 +3,7 @@ import { FaRegSave } from "react-icons/fa";
 import ImageHandler from "./ImageHandler";
 import BlogTitleDesc from "./BlogTitleDesc";
 import PublishingDetails from "./PublishingDetails";
+import { VerifyFormFields } from "../../utils/BlogUtils";
 
 const initialState = {
   title: "",
@@ -43,6 +44,11 @@ export default function AddBlogFormPage() {
         publishDate: new Date().toISOString().toString().split("T")[0],
       }));
     }
+    const validationError = VerifyFormFields(formData);
+    if (validationError) {
+      alert(validationError);
+      return;
+    }
 
     const newBlog = {
       ...formData,
@@ -54,6 +60,8 @@ export default function AddBlogFormPage() {
 
     localStorage.setItem("blogs", JSON.stringify([...blogs, newBlog]));
     initialData.current = formData;
+    setFormData(initialState);
+    setImageError("");
     alert("Blog saved successfully");
   };
 
