@@ -27,7 +27,6 @@ export default function AddBlogFormPage() {
   };
 
   const handleChange = (e) => {
-    console.log(e);
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -38,13 +37,19 @@ export default function AddBlogFormPage() {
 
   const handleSave = () => {
     const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+    if (formData.publish) {
+      setFormData((prev) => ({
+        ...prev,
+        publishDate: new Date().toISOString().toString().split("T")[0],
+      }));
+    }
 
     const newBlog = {
       ...formData,
       id: new Date().getTime().toString(),
       isDeleted: false,
       deletedAt: null,
-      createdAt: Date.now(),
+      createdAt: new Date().toISOString().toString().split("T")[0],
     };
 
     localStorage.setItem("blogs", JSON.stringify([...blogs, newBlog]));

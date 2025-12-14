@@ -6,26 +6,32 @@ export default function PublishingDetails({
   category,
   onChange,
   author,
+  date,
 }) {
   const togglePublishStatus = () => {
     setPublish(!publish);
   };
+  console.log(new Date().toISOString().toString().split("T")[0]);
 
   return (
     <div>
       <h1 className="font-semibold text-gray-600 mb-4">Publishing Details</h1>
       <div className="space-y-3">
-        <label htmlFor="category" className="text-gray-500 font-semibold">
-          Category
-        </label>
-        <div className="p-1">
-          <input
-            type="text"
-            value={category}
-            className="w-full border border-gray-200 rounded-lg "
-            onChange={onChange}
-          />
+        <div>
+          <label htmlFor="category" className="text-gray-500 font-semibold">
+            Category
+          </label>
+          <div className="p-1">
+            <input
+              type="text"
+              name="category"
+              value={category}
+              className="w-full border border-gray-200 text-gray-600 font-semibold px-2 rounded-lg "
+              onChange={onChange}
+            />
+          </div>
         </div>
+
         <div>
           <label htmlFor="category" className="text-gray-500 font-semibold">
             Author
@@ -33,13 +39,33 @@ export default function PublishingDetails({
           <div className="p-1">
             <input
               type="text"
+              name="author"
               value={author}
-              className="w-full border border-gray-200 rounded-lg text-gray-400 font-semibold px-2"
+              className="w-full border border-gray-200 rounded-lg text-gray-600 font-semibold px-2"
               onChange={onChange}
             />
             <p className="text-sm text-gray-600">
               Posting as <span className="text-gray-800">{author}</span>
             </p>
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="category" className="text-gray-500 font-semibold">
+            Publish Date
+          </label>
+          <div className="p-1 cursor-not-allowed">
+            {/* <input
+              type="date"
+              name="publishDate"
+              value={date}
+              className="w-full border border-gray-200 rounded-lg text-gray-600 font-semibold px-2"
+            /> */}
+            <h1 className="w-full border border-gray-200 rounded-lg text-gray-600 font-semibold px-2">
+              {publish
+                ? new Date().toISOString().toString().split("T")[0]
+                : "yyyy-mm-dd".toUpperCase()}
+            </h1>
           </div>
         </div>
         <div className="flex justify-between items-center">
