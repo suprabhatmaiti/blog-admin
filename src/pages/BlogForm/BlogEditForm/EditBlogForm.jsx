@@ -63,6 +63,8 @@ export default function EditBlogFormPage() {
 
       if (blogData.publish && !initialData.current.publish) {
         blogData.publishDate = new Date().toISOString();
+      } else {
+        blogData.publishDate = "Not Published Yet";
       }
 
       const validationError = VerifyFormFields(blogData);
