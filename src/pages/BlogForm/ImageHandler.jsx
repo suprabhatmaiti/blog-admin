@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FaRegSave, FaCloudUploadAlt } from "react-icons/fa";
 import { validateImage, fileToBase64 } from "../../utils/ImageUtils";
 
@@ -19,39 +18,37 @@ export default function ImageHandler({ value, onChange, error, setError }) {
   };
 
   return (
-    <div className=" w-full mt-8 space-y-6 bg-white p-2 rounded-xl px-8 py-8 ">
-      <h3 className="font-semibold text-gray-600 mb-4 text-lg">
+    <div className="w-full space-y-4 bg-white p-4 md:p-6 rounded-xl">
+      <h3 className="font-semibold text-slate-700 text-base md:text-lg">
         Featured Image
       </h3>
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-      <div
-        className={`relative border-2 border-dashed rounded-xl p-6 text-center border-red-100`}
-      >
+      {error && <p className="text-red-500 text-xs md:text-sm">{error}</p>}
+      <div className="relative border-2 border-dashed rounded-lg md:rounded-xl p-4 md:p-6 text-center border-indigo-100 bg-indigo-50/50">
         {value ? (
           <div className="relative w-full rounded-lg overflow-hidden shadow-md">
             <button
               onClick={onCancelImage}
-              className="absolute top-0 right-0  bg-red-600 text-white px-2 cursor-pointer"
+              className="absolute top-2 right-2 bg-indigo-600 text-white px-2 py-1 cursor-pointer text-sm rounded"
             >
               X
             </button>
             <img
               src={value}
               alt="Preview"
-              className=" w-40 h-65 object-contain"
+              className="w-24 md:w-40 h-auto max-h-48 md:max-h-64 object-contain mx-auto"
             />
           </div>
         ) : (
-          <div className="cursor-ppointer">
-            <div className="w-10 h-10 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-3">
-              <FaCloudUploadAlt size={20} />
+          <div className="cursor-pointer">
+            <div className="w-8 md:w-10 h-8 md:h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-3">
+              <FaCloudUploadAlt size={16} />
             </div>
-            <p className="text-sm text-slate-600 font-medium">
+            <p className="text-xs md:text-sm text-slate-600 font-medium">
               Click to upload
             </p>
             <input
               type="file"
-              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer "
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               accept="image/png, image/jpeg"
               onChange={handleImageChange}
             />

@@ -23,13 +23,18 @@ export default function PublishingDetails({
 
   return (
     <div>
-      <h1 className="font-semibold text-gray-600 mb-4">Publishing Details</h1>
-      <div className="space-y-3">
+      <h1 className="font-semibold text-slate-700 mb-4 text-sm md:text-base">
+        Publishing Details
+      </h1>
+      <div className="space-y-3 md:space-y-4">
         <div>
-          <label htmlFor="category" className="text-gray-500 font-semibold">
+          <label
+            htmlFor="category"
+            className="text-slate-500 font-semibold text-sm md:text-base block mb-2"
+          >
             Category
           </label>
-          <div className="p-1">
+          <div>
             <Dropdown
               name="category"
               value={category}
@@ -41,52 +46,55 @@ export default function PublishingDetails({
         </div>
 
         <div>
-          <label htmlFor="category" className="text-gray-500 font-semibold">
+          <label
+            htmlFor="category"
+            className="text-slate-500 font-semibold text-sm md:text-base block mb-2"
+          >
             Author
           </label>
-          <div className="p-1">
+          <div>
             <input
               type="text"
               name="author"
               value={author}
-              className="w-full border border-gray-200 rounded-lg text-gray-600 font-semibold px-2"
+              className="w-full border border-slate-200 rounded-lg text-slate-700 font-semibold px-3 py-2 text-sm md:text-base"
               onChange={onChange}
             />
-            <p className="text-sm text-gray-600">
-              Posting as <span className="text-gray-800">{author}</span>
+            <p className="text-xs md:text-sm text-slate-600 mt-1">
+              Posting as{" "}
+              <span className="text-slate-800 font-medium">{author}</span>
             </p>
           </div>
         </div>
 
         <div>
-          <label htmlFor="category" className="text-gray-500 font-semibold">
+          <label
+            htmlFor="category"
+            className="text-slate-500 font-semibold text-sm md:text-base block mb-2"
+          >
             Publish Date
           </label>
-          <div className="p-1 cursor-not-allowed">
-            {/* <input
-              type="date"
-              name="publishDate"
-              value={date}
-              className="w-full border border-gray-200 rounded-lg text-gray-600 font-semibold px-2"
-            /> */}
-            <h1 className="w-full border border-gray-200 rounded-lg text-gray-600 font-semibold px-2">
+          <div className="cursor-not-allowed">
+            <h1 className="w-full border border-slate-200 rounded-lg text-slate-700 font-semibold px-3 py-2 text-sm md:text-base bg-slate-50">
               {publish
                 ? new Date().toISOString().toString().split("T")[0]
                 : "yyyy-mm-dd".toUpperCase()}
             </h1>
           </div>
         </div>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-start sm:items-center gap-4 sm:gap-0 pt-2">
           <div>
-            <h1 className="text-md font-semibold text-gray-500">Status</h1>
-            <div className="text-sm text-gray-500">
+            <h1 className="text-sm md:text-base font-semibold text-slate-500">
+              Status
+            </h1>
+            <div className="text-xs md:text-sm text-slate-500 mt-1">
               {publish ? <p>Visible to public</p> : <p>Save as Draft</p>}
             </div>
           </div>
           <button
             onClick={togglePublishStatus}
             className={`relative h-6 w-11 inline-flex rounded-full focus:outline-none cursor-pointer ${
-              publish ? "bg-green-600" : "bg-slate-400"
+              publish ? "bg-indigo-600" : "bg-slate-300"
             }`}
           >
             <span

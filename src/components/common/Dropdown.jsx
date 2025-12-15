@@ -52,7 +52,7 @@ export default function Dropdown({
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex w-full items-center justify-between rounded-lg border border-gray-200 bg-white px-4 py-1 text-left text-base font-semibold text-slate-600 shadow-sm transition focus:outline-none"
+        className="flex w-full items-center justify-between rounded-lg border border-slate-200 bg-white px-4 py-2 text-left text-base font-semibold text-slate-700 shadow-sm transition focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1"
       >
         <span>{selectedOption ? selectedOption.label : placeholder}</span>
         <IoIosArrowDown
@@ -63,19 +63,19 @@ export default function Dropdown({
       </button>
 
       {isOpen && (
-        <ul className="absolute z-10 mt-1 w-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg">
+        <ul className="absolute z-10 mt-1 w-full overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg">
           {normalizedOptions.map((option) => (
             <li key={option.value}>
               <button
                 type="button"
                 onClick={() => handleSelect(option)}
-                className={`flex w-full items-center justify-between px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-gray-100 ${
-                  option.value === value ? "bg-gray-50" : ""
+                className={`flex w-full items-center justify-between px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-indigo-50 ${
+                  option.value === value ? "bg-indigo-50 text-indigo-700" : ""
                 }`}
               >
                 <span>{option.label}</span>
                 {option.value === value && (
-                  <TiTick className="h-4 w-4 text-green-500" />
+                  <TiTick className="h-4 w-4 text-indigo-600" />
                 )}
               </button>
             </li>
