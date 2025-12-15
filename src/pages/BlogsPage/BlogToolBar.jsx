@@ -1,7 +1,14 @@
 import React from "react";
 import { IoIosSearch } from "react-icons/io";
 
-export default function BlogToolBar({ search, setSearch, filter, setFilter }) {
+export default function BlogToolBar({
+  search,
+  setSearch,
+  filter,
+  setFilter,
+  status,
+  setStatus,
+}) {
   return (
     <div>
       <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-4 mt-4">
@@ -20,17 +27,22 @@ export default function BlogToolBar({ search, setSearch, filter, setFilter }) {
         </div>
         <div className="flex gap-4">
           <select
+            value={status}
             className="bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
-            onChange={(e) => setFilter(e.target.value)}
+            onChange={(e) => setStatus(e.target.value)}
           >
             <option value="All">All Status</option>
             <option value="Published">Published</option>
             <option value="Draft">Draft</option>
           </select>
-          <select className="bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
-            <option>All Categories</option>
-            <option>Design</option>
-            <option>Development</option>
+          <select
+            value={filter}
+            className="bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+            onChange={(e) => setFilter(e.target.value)}
+          >
+            <option value="All">All Categories</option>
+            <option value="Design">Design</option>
+            <option value="Development">Development</option>
           </select>
         </div>
       </div>

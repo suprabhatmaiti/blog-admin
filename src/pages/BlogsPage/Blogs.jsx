@@ -24,6 +24,13 @@ export default function BlogsPage() {
   const onSearchChange = (e) => {
     setSearch(e.target.value);
   };
+  const onFilterChange = (e) => {
+    setFilter(e.target.value);
+  };
+
+  const onStatusChange = (e) => {
+    setStatus(e.target.value);
+  };
 
   const handlePrev = () => {
     setCurrentPage((prev) => prev - 1);
@@ -33,11 +40,8 @@ export default function BlogsPage() {
     setCurrentPage((prev) => prev + 1);
   };
   useEffect(() => {
-    const totalBlogs = blogs.length;
-    const blogsPerPage = 10;
-    const totalPages = Math.ceil(totalBlogs / blogsPerPage);
-    setTotalPages(totalPages);
-  }, [blogs]);
+    setCurrentPage(1);
+  }, [search, filter, status]);
 
   const filteredBlogs = useMemo(() => {
     let filtered = blogs;
@@ -56,9 +60,21 @@ export default function BlogsPage() {
     return filtered;
   }, [blogs, search, filter, status]);
 
+  const blogsPerPage = 10;
+  const paginatedBlogs = useMemo(() => {
+    const startIndex = (currentPage - 1) * blogsPerPage;
+    const endIndex = startIndex + blogsPerPage;
+    return filteredBlogs.slice(startIndex, endIndex);
+  }, [filteredBlogs, currentPage]);
+
+  useEffect(() => {
+    const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
+    setTotalPages(totalPages);
+  }, [filteredBlogs]);
+
   return (
     <div className="min-h-screen w-full md:px-6 px-4 py-8 bg-slate-50 space-y-4">
-      <div className="flex md:flex-row flex-col justify-betweengap-4 justify-between">
+      <div className="flex md:flex-row flex-col justify-between gap-4">
         <div>
           <h1 className="md:text-3xl text-2xl font-bold text-slate-900">
             All Blogs
@@ -79,11 +95,13 @@ export default function BlogsPage() {
           search={search}
           setSearch={onSearchChange}
           filter={filter}
-          setFilter={setFilter}
+          setFilter={onFilterChange}
+          status={status}
+          setStatus={onStatusChange}
         />
       </div>
       <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
-        <BlogsTable blogs={filteredBlogs} currentPage={currentPage} />
+        <BlogsTable blogs={paginatedBlogs} currentPage={currentPage} />
         <div className="flex md:flex-row flex-col items-center gap-4 bg-white border-t border-gray-200 py-2 justify-between px-4 text-sm md:text-base text-slate-500">
           <div>
             <p>
