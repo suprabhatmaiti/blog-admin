@@ -1,10 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaRegSave } from "react-icons/fa";
 import ImageHandler from "../ImageHandler";
 import BlogTitleDesc from "../BlogTitleDesc";
 import PublishingDetails from "../PublishingDetails";
 import Button from "../../../components/common/Button";
 import { VerifyFormFields } from "../../../utils/BlogUtils";
+import { useNavigate, useParams } from "react-router-dom";
+import { addActivity } from "../../../utils/ActivityUtils";
 
 const initialState = {
   title: "",
@@ -16,11 +18,25 @@ const initialState = {
   publish: false,
 };
 
-export default function AddBlogFormPage() {
+export default function EditBlogFormPage() {
   const [formData, setFormData] = useState(initialState);
   const [imageError, setImageError] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const navigate = useNavigate();
+
   const initialData = useRef(initialState);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+    const blogToEdit = blogs.find((blog) => blog.id === id);
+
+    if (blogToEdit) {
+      setFormData(blogToEdit);
+      initialData.current = blogToEdit;
+    }
+  }, [id]);
 
   const isFormChanged =
     JSON.stringify(formData) !== JSON.stringify(initialData.current);
@@ -38,14 +54,14 @@ export default function AddBlogFormPage() {
     setFormData((prev) => ({ ...prev, publish: value }));
   };
 
-  const handleSave = () => {
+  const handleUpdate = () => {
     setIsSaving(true);
     try {
       const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
 
       const blogData = { ...formData };
 
-      if (blogData.publish) {
+      if (blogData.publish && !initialData.current.publish) {
         blogData.publishDate = new Date().toISOString();
       }
 
@@ -55,42 +71,58 @@ export default function AddBlogFormPage() {
         return;
       }
 
-      const newBlog = {
-        ...blogData,
-        id: new Date().getTime().toString(),
-        isDeleted: false,
-        deletedAt: null,
-        createdAt: new Date().toISOString().toString().split("T")[0],
-      };
+      const updatedBlogs = blogs.map((blog) => {
+        if (blog.id === id) {
+          return {
+            ...blog,
+            ...blogData,
+          };
+        }
+        return blog;
+      });
 
-      localStorage.setItem("blogs", JSON.stringify([...blogs, newBlog]));
-      initialData.current = formData;
-      setFormData(initialState);
+      addActivity({
+        action: "UPDATED",
+        status: blogData.status,
+        title: blogData.title,
+        author: blogData.author,
+      });
+
+      localStorage.setItem("blogs", JSON.stringify(updatedBlogs));
+      initialData.current = blogData;
       setImageError("");
-      alert("Blog saved successfully");
+      alert("Blog updated successfully");
+      navigate("/blogs");
     } catch (error) {
-      console.error("Failed to save blog:", error);
-      alert("Failed to save blog. Please try again.");
+      console.error("Failed to update blog:", error);
+      alert("Failed to update blog. Please try again.");
     } finally {
       setIsSaving(false);
     }
+  };
+  const onCancelClick = () => {
+    navigate("/blogs");
   };
 
   return (
     <div className="min-h-screen w-full px-6 py-8 bg-slate-50 ">
       <div className="md:flex justify-between flex-wrap">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Create New Post</h1>
+          <h1 className="text-3xl font-bold text-slate-900">Edit Blog</h1>
           <p className="text-slate-500 text-base mt-1 ">
-            Fill the details below to create a new blog.
+            Change the details below to edit your blog.
           </p>
         </div>
         <div className="flex items-center mb-4 gap-6 mt-4">
-          <Button variant="secondary" className="rounded-full gap-2">
+          <Button
+            onClick={onCancelClick}
+            variant="secondary"
+            className="rounded-full gap-2"
+          >
             Cancel
           </Button>
           <Button
-            onClick={handleSave}
+            onClick={handleUpdate}
             disabled={!isFormChanged || isSaving}
             className="rounded-full gap-2"
           >
