@@ -72,8 +72,8 @@ export default function AddBlogFormPage() {
       });
 
       localStorage.setItem("blogs", JSON.stringify([...blogs, newBlog]));
-      initialData.current = formData;
       setFormData(initialState);
+      initialData.current = initialState;
       setImageError("");
       alert("Blog saved successfully");
     } catch (error) {
@@ -84,6 +84,11 @@ export default function AddBlogFormPage() {
     }
   };
 
+  const onCancelCLick = () => {
+    setFormData(initialState);
+    initialData.current = initialState;
+    setImageError("");
+  };
   return (
     <div className="min-h-screen w-full px-6 py-8 bg-slate-50 ">
       <div className="md:flex justify-between flex-wrap">
@@ -94,7 +99,12 @@ export default function AddBlogFormPage() {
           </p>
         </div>
         <div className="flex items-center mb-4 gap-6 mt-4">
-          <Button variant="secondary" className="rounded-full gap-2">
+          <Button
+            onClick={onCancelCLick}
+            variant="secondary"
+            disabled={!isFormChanged || isSaving}
+            className="rounded-full gap-2 "
+          >
             Cancel
           </Button>
           <Button
@@ -103,7 +113,7 @@ export default function AddBlogFormPage() {
             className="rounded-full gap-2"
           >
             <FaRegSave />
-            Save Changes
+            Create Blog
           </Button>
         </div>
       </div>
