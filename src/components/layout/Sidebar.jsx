@@ -28,7 +28,7 @@ export default function Sidebar() {
       {mobileMenuOpen && (
         <div
           onClick={toggleSidebar}
-          className="fixed backdrop-blur-lg inset-0 z-40 md:hidden"
+          className="fixed backdrop-blur-lg inset-0 z-50 md:hidden"
         ></div>
       )}
       <aside
