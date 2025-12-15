@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./pages/Dashboard.jsx";
-import AddBlogFormPage from "./pages/BlogAddForm/AddBlogFormPage.jsx";
+import AddBlogFormPage from "./pages/BlogForm/BlogAddForm/AddBlogFormPage.jsx";
 import BlogsPage from "./pages/BlogsPage/Blogs.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 
