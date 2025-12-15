@@ -1,4 +1,3 @@
-import React from "react";
 import { MdLinkOff, MdArrowBack } from "react-icons/md";
 import Button from "../components/common/Button";
 import { useNavigate } from "react-router-dom";

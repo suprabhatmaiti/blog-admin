@@ -9,7 +9,7 @@ import Button from "../../components/common/Button";
 export default function BlogsPage() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
-  const [status, setStatus] = useState("All");
+  const [status, setStatus] = useState("All Status");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -54,13 +54,14 @@ export default function BlogsPage() {
     if (filter !== "All") {
       filtered = filtered.filter((blog) => blog.category === filter);
     }
-    if (status !== "All") {
-      filtered = filtered.filter((blog) => blog.status === status);
+    if (status !== "All Status") {
+      const isPublished = status === "Published";
+      filtered = filtered.filter((blog) => blog.publish === isPublished);
     }
     return filtered;
   }, [blogs, search, filter, status]);
 
-  const blogsPerPage = 10;
+  const blogsPerPage = 5;
   const paginatedBlogs = useMemo(() => {
     const startIndex = (currentPage - 1) * blogsPerPage;
     const endIndex = startIndex + blogsPerPage;
@@ -69,7 +70,7 @@ export default function BlogsPage() {
 
   useEffect(() => {
     const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
-    setTotalPages(totalPages);
+    if (totalPages > 0) setTotalPages(totalPages);
   }, [filteredBlogs]);
 
   return (
@@ -102,11 +103,11 @@ export default function BlogsPage() {
       </div>
       <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
         <BlogsTable blogs={paginatedBlogs} currentPage={currentPage} />
-        <div className="flex md:flex-row flex-col items-center gap-4 bg-white border-t border-gray-200 py-2 justify-between px-4 text-sm md:text-base text-slate-500">
+        <div className="flex md:flex-row flex-col flex-wrap items-center gap-4 bg-white border-t border-gray-200 py-2 justify-between px-4 text-sm md:text-base text-slate-500">
           <div>
             <p>
-              Showing {filteredBlogs.length} result
-              {filteredBlogs.length > 1 && <span>s</span>}
+              Showing {paginatedBlogs.length} of {filteredBlogs.length} result
+              {filteredBlogs.length !== 1 && <span>s</span>}
             </p>
           </div>
           <div className="space-x-4 text-sm md:text-base">

@@ -1,7 +1,4 @@
-import React from "react";
 import { FcManager, FcSearch } from "react-icons/fc";
-import { IoMdAdd } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   return (

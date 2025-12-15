@@ -18,7 +18,7 @@ export default function Dashboard() {
       <div className="mt-6 flex justify-between flex-wrap gap-4">
         <Card label={"Total Blogs"} value={totalBlogs} type={1} />
         <Card label={"Published"} value={published.length} type={2} />
-        <Card label={"Total Blogs"} value={draft.length} type={3} />
+        <Card label={"Drafts"} value={draft.length} type={3} />
       </div>
     </div>
   );
