@@ -19,18 +19,12 @@ export default function Sidebar() {
   };
 
   const activeClass =
-    "flex gap-2 items-center text-white font-bold bg-red-500 px-2 py-2 rounded-lg cursor-pointer";
+    "flex gap-2 items-center text-white font-bold bg-red-500 px-2 py-2 rounded-lg cursor-pointer shadow-sm";
   const inActiveClass =
-    "flex gap-2 items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer";
+    "flex gap-2 items-center hover:bg-slate-200 px-2 py-2 rounded-lg cursor-pointer";
 
   return (
     <>
-      {/* <button
-        onClick={toggleSidebar}
-        className="hover:bg-gray-200 px-2 py-1 rounded-lg text-2xl absolute left-0 top-0 md:hidden"
-      >
-        {mobileMenuOpen ? <AiOutlineMenuFold /> : <AiOutlineMenuUnfold />}
-      </button> */}
       {mobileMenuOpen && (
         <div
           onClick={toggleSidebar}
@@ -38,7 +32,7 @@ export default function Sidebar() {
         ></div>
       )}
       <aside
-        className={`fixed left-0 top-0 h-screen md:w-64 md:translate-x-0 bg-white border-r border-gray-300 transition-all duration-300 z-50 ${
+        className={`fixed left-0 top-0 h-screen md:w-64 md:translate-x-0 bg-white border-r border-slate-300 transition-all duration-300 z-50 ${
           mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         } flex flex-col  `}
       >
@@ -51,16 +45,16 @@ export default function Sidebar() {
           {mobileMenuOpen ? <FaArrowLeft /> : <FaArrowRight />}
         </button>
 
-        <div className="flex gap-4 justify-center items-center md:mb-4 px-8 py-4 border-b border-gray-200 md:border-none">
+        <div className="flex gap-4 justify-center items-center md:mb-4 px-8 py-4 border-b border-slate-200 md:border-none">
           <h1 className="text-xl md:text-3xl bg-red-500 text-white px-2 py-1 rounded-lg font-bold">
             <FiShield />
           </h1>
-          <h1 className="font-bold text-xl md:text-2xl text-gray-600">
+          <h1 className="font-bold text-xl md:text-2xl text-slate-600">
             Blog<span className="text-red-500">Admin</span>
           </h1>
         </div>
 
-        <nav className="space-y-3 font-semibold text-gray-600 text-sm md:text-lg py-3 px-4 grow">
+        <nav className="space-y-3 font-semibold text-slate-600 text-sm md:text-lg py-3 px-4 grow">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -95,12 +89,12 @@ export default function Sidebar() {
           </NavLink>
         </nav>
 
-        <div className="mt-auto px-4 py-5 bg-gray-100 flex justify-between items-center">
+        <div className="mt-auto px-4 py-5 bg-slate-100 flex justify-between items-center">
           <div className="flex gap-4 items-center">
-            <FcManager className=" text-2xl md:text-4xl border border-gray-400 rounded-full" />
+            <FcManager className=" text-2xl md:text-4xl border border-slate-400 rounded-full" />
             <div>
               <h1 className="font-semibold">Admin</h1>
-              <p className="text-sm text-gray-500">admin@blog.com</p>
+              <p className="text-sm text-slate-500">admin@blog.com</p>
             </div>
           </div>
         </div>
