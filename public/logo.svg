@@ -1,0 +1,27 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<title>BlogAdmin Logo</title>
+
+<!-- Outer Shape (Shield) - Use a bold red color, similar to the assignment's theme -->
+<path d="M20 38C20 38 35 34 35 22V8.5L20 2L5 8.5V22C5 34 20 38 20 38Z" fill="#DC2626"/>
+<path d="M20 38C20 38 35 34 35 22V8.5L20 2L5 8.5V22C5 34 20 38 20 38Z" stroke="#B91C1C" stroke-width="2"/>
+
+<!-- Inner Element (File/Document Icon) - Represents "Blog" content -->
+<!-- This is a simplified document icon for clarity -->
+<rect x="12" y="10" width="16" height="18" rx="2" fill="white"/>
+<rect x="15" y="13" width="10" height="2" rx="1" fill="#DC2626"/>
+<rect x="15" y="17" width="12" height="2" rx="1" fill="#E5E7EB"/>
+<rect x="15" y="21" width="8" height="2" rx="1" fill="#E5E7EB"/>
+
+<!-- "A" for Admin in the Shield -->
+<text x="20" y="31" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#DC2626" text-anchor="middle">A</text>
+
+<!-- Highlight/Gradient Effect (Optional but adds polish) -->
+<path d="M20 38C20 38 35 34 35 22V8.5L20 2L5 8.5V22C5 34 20 38 20 38Z" fill="url(#paint0_linear_1_2)" opacity="0.15"/>
+<defs>
+<linearGradient id="paint0_linear_1_2" x1="20" y1="2" x2="20" y2="38" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="#374151"/>
+</linearGradient>
+</defs>
+
+</svg>
