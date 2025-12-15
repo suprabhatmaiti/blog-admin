@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { MdAddCircleOutline } from "react-icons/md";
 import BlogToolBar from "./BlogToolBar";
 import { IoMdAdd } from "react-icons/io";
 import BlogsTable from "./BlogsTable";
+import { Blogs } from "../../utils/BlogUtils";
+import { useNavigate } from "react-router-dom";
+import Button from "../../components/common/Button";
 
 export default function BlogsPage() {
   const [search, setSearch] = useState("");
@@ -11,12 +13,13 @@ export default function BlogsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const blogs = useMemo(() => {
-    const totalBlogs = localStorage.getItem("blogs")
-      ? JSON.parse(localStorage.getItem("blogs"))
-      : [];
-    return totalBlogs;
-  }, []);
+  const navigate = useNavigate();
+
+  const onAddBlog = () => {
+    navigate("/add-blog");
+  };
+
+  const blogs = Blogs();
 
   const onSearchChange = (e) => {
     setSearch(e.target.value);
@@ -38,6 +41,7 @@ export default function BlogsPage() {
 
   const filteredBlogs = useMemo(() => {
     let filtered = blogs;
+    filtered = filtered.filter((blog) => !blog.isDeleted);
     if (search) {
       filtered = filtered.filter((blog) =>
         blog.title.toLowerCase().includes(search.toLowerCase())
@@ -53,8 +57,8 @@ export default function BlogsPage() {
   }, [blogs, search, filter, status]);
 
   return (
-    <div className="min-h-screen w-full md:px-6 px-4 py-8 bg-gray-100 space-y-4">
-      <div className="flex gap-4 justify-between">
+    <div className="min-h-screen w-full md:px-6 px-4 py-8 bg-slate-50 space-y-4">
+      <div className="flex md:flex-row flex-col justify-betweengap-4 justify-between">
         <div>
           <h1 className="md:text-3xl text-2xl font-bold text-slate-900">
             All Blogs
@@ -64,10 +68,10 @@ export default function BlogsPage() {
           </p>
         </div>
         <div className="flex items-center mb-4 gap-6 mt-4">
-          <button className="rounded-full md:px-4 md:py-2 flex justify-center items-center gap-2 cursor-pointer bg-red-500 text-white hover:bg-red-600 font-semibold  ">
-            <IoMdAdd className="text-3xl md:text-4xl" />
-            <h1 className="hidden">Add New Blog</h1>
-          </button>
+          <Button onClick={onAddBlog} className="gap-2 rounded-lg px-3 py-2">
+            <IoMdAdd className="text-xl " />
+            <span>Add New Blog</span>
+          </Button>
         </div>
       </div>
       <div>
@@ -80,30 +84,33 @@ export default function BlogsPage() {
       </div>
       <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
         <BlogsTable blogs={filteredBlogs} currentPage={currentPage} />
-        <div className="flex items-center gap-4 bg-white border-t border-gray-200 py-2 justify-between px-4">
+        <div className="flex md:flex-row flex-col items-center gap-4 bg-white border-t border-gray-200 py-2 justify-between px-4 text-sm md:text-base text-slate-500">
           <div>
             <p>
-              Showing {5 * (currentPage - 1) + 1} to {currentPage * 5} entries
+              Showing {filteredBlogs.length} result
+              {filteredBlogs.length > 1 && <span>s</span>}
             </p>
           </div>
-          <div className="space-x-4">
-            <button
+          <div className="space-x-4 text-sm md:text-base">
+            <Button
               onClick={handlePrev}
               disabled={currentPage === 1}
-              className="px-4 py-2 border rounded disabled:opacity-50"
+              variant="secondary"
+              className="px-3 py-2"
             >
               Previous
-            </button>
+            </Button>
             <span>
               Page {currentPage} of {totalPages}
             </span>
-            <button
+            <Button
               onClick={handleNext}
               disabled={currentPage === totalPages}
-              className="px-4 py-2 border rounded disabled:opacity-50"
+              variant="secondary"
+              className="px-3 py-2"
             >
               Next
-            </button>
+            </Button>
           </div>
         </div>
       </div>

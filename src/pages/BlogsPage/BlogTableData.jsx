@@ -3,10 +3,12 @@ import { MdEdit } from "react-icons/md";
 import { IoIosTrash } from "react-icons/io";
 
 export default function BlogTableData({ blog }) {
-  const date = new Date(blog.publishDate).toLocaleDateString();
+  const date = blog.publishDate
+    ? new Date(blog.publishDate).toLocaleDateString()
+    : "";
 
   return (
-    <tr className="hover:bg-slate-50/80 transition-colors group">
+    <tr className="hover:bg-slate-50/80 transition-colors group  ">
       <td className="px-6 py-4 font-medium text-slate-900">{blog.title}</td>
       <td className="px-6 py-4 text-slate-500">
         <span className="px-2 py-1 bg-slate-100 rounded text-xs font-medium text-slate-600">
@@ -39,12 +41,12 @@ export default function BlogTableData({ blog }) {
       </td>
       <td className="px-6 py-4 text-slate-500">{date}</td>
       <td className="px-6 py-4 text-right">
-        <div className="flex justify-end gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
+        <div className="flex justify-end gap-1 opacity-60 group-hover:opacity-100">
           <button className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
-            <MdEdit size={16} />
+            <MdEdit size={20} />
           </button>
           <button className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
-            <IoIosTrash size={16} />
+            <IoIosTrash size={20} />
           </button>
         </div>
       </td>
