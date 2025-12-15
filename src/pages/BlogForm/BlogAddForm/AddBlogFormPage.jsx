@@ -5,6 +5,7 @@ import BlogTitleDesc from "../BlogTitleDesc";
 import PublishingDetails from "../PublishingDetails";
 import Button from "../../../components/common/Button";
 import { VerifyFormFields } from "../../../utils/BlogUtils";
+import { addActivity } from "../../../utils/ActivityUtils";
 
 const initialState = {
   title: "",
@@ -62,6 +63,13 @@ export default function AddBlogFormPage() {
         deletedAt: null,
         createdAt: new Date().toISOString().toString().split("T")[0],
       };
+
+      addActivity({
+        action: "CREATED",
+        status: newBlog.status,
+        title: newBlog.title,
+        author: newBlog.author,
+      });
 
       localStorage.setItem("blogs", JSON.stringify([...blogs, newBlog]));
       initialData.current = formData;

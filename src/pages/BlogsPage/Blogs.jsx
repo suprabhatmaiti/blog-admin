@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import BlogToolBar from "./BlogToolBar";
 import { IoMdAdd } from "react-icons/io";
 import BlogsTable from "./BlogsTable";
-import { Blogs } from "../../utils/BlogUtils";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/common/Button";
 
@@ -19,7 +18,11 @@ export default function BlogsPage() {
     navigate("/add-blog");
   };
 
-  const blogs = Blogs();
+  const blogs = useMemo(() => {
+    return localStorage.getItem("blogs")
+      ? JSON.parse(localStorage.getItem("blogs"))
+      : [];
+  }, []);
 
   const onSearchChange = (e) => {
     setSearch(e.target.value);
@@ -106,8 +109,16 @@ export default function BlogsPage() {
         <div className="flex md:flex-row flex-col flex-wrap items-center gap-4 bg-white border-t border-gray-200 py-2 justify-between px-4 text-sm md:text-base text-slate-500">
           <div>
             <p>
-              Showing {paginatedBlogs.length} of {filteredBlogs.length} result
-              {filteredBlogs.length !== 1 && <span>s</span>}
+              {filteredBlogs.length > 0 ? (
+                <>
+                  Showing {(currentPage - 1) * blogsPerPage + 1} to{" "}
+                  {Math.min(currentPage * blogsPerPage, filteredBlogs.length)}{" "}
+                  of {filteredBlogs.length} result
+                  {filteredBlogs.length !== 1 && <span>s</span>}
+                </>
+              ) : (
+                "No results"
+              )}
             </p>
           </div>
           <div className="space-x-4 text-sm md:text-base">
@@ -115,7 +126,7 @@ export default function BlogsPage() {
               onClick={handlePrev}
               disabled={currentPage === 1}
               variant="secondary"
-              className="px-3 py-2"
+              className="px-3 py-2 cursor-pointer"
             >
               Previous
             </Button>
@@ -126,7 +137,7 @@ export default function BlogsPage() {
               onClick={handleNext}
               disabled={currentPage === totalPages}
               variant="secondary"
-              className="px-3 py-2"
+              className="px-3 py-2 cursor-pointer"
             >
               Next
             </Button>

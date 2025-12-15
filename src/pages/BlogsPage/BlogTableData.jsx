@@ -2,7 +2,11 @@ import React from "react";
 import { MdEdit } from "react-icons/md";
 import { IoIosTrash } from "react-icons/io";
 
-export default function BlogTableData({ blog }) {
+export default function BlogTableData({ blog, onDelete }) {
+  const onDeleteClick = () => {
+    onDelete(blog.id);
+  };
+
   const date = blog.publishDate
     ? new Date(blog.publishDate).toLocaleDateString()
     : "";
@@ -45,7 +49,10 @@ export default function BlogTableData({ blog }) {
           <button className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
             <MdEdit size={20} />
           </button>
-          <button className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
+          <button
+            onClick={onDeleteClick}
+            className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+          >
             <IoIosTrash size={20} />
           </button>
         </div>
