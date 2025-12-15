@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import AddBlogFormPage from "./pages/BlogForm/BlogAddForm/AddBlogFormPage.jsx";
 import BlogsPage from "./pages/BlogsPage/Blogs.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
+import EditBlogFormPage from "./pages/BlogForm/BlogEditForm/EditBlogForm.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/add-blog",
         element: <AddBlogFormPage />,
+      },
+      {
+        path: "/edit-blog/:id",
+        element: <EditBlogFormPage />,
       },
       {
         path: "*",

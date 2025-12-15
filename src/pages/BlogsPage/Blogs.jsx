@@ -4,6 +4,7 @@ import { IoMdAdd } from "react-icons/io";
 import BlogsTable from "./BlogsTable";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/common/Button";
+import { addActivity } from "../../utils/ActivityUtils";
 
 export default function BlogsPage() {
   const [search, setSearch] = useState("");
@@ -11,18 +12,20 @@ export default function BlogsPage() {
   const [status, setStatus] = useState("All Status");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [blogs, setBlogs] = useState([]);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedBlogs = localStorage.getItem("blogs")
+      ? JSON.parse(localStorage.getItem("blogs"))
+      : [];
+    setBlogs(storedBlogs);
+  }, []);
 
   const onAddBlog = () => {
     navigate("/add-blog");
   };
-
-  const blogs = useMemo(() => {
-    return localStorage.getItem("blogs")
-      ? JSON.parse(localStorage.getItem("blogs"))
-      : [];
-  }, []);
 
   const onSearchChange = (e) => {
     setSearch(e.target.value);
@@ -47,8 +50,7 @@ export default function BlogsPage() {
   }, [search, filter, status]);
 
   const filteredBlogs = useMemo(() => {
-    let filtered = blogs;
-    filtered = filtered.filter((blog) => !blog.isDeleted);
+    let filtered = blogs.filter((blog) => !blog.isDeleted);
     if (search) {
       filtered = filtered.filter((blog) =>
         blog.title.toLowerCase().includes(search.toLowerCase())
@@ -75,6 +77,32 @@ export default function BlogsPage() {
     const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
     if (totalPages > 0) setTotalPages(totalPages);
   }, [filteredBlogs]);
+
+  const onDeleteBlog = (id) => {
+    const blogs = localStorage.getItem("blogs")
+      ? JSON.parse(localStorage.getItem("blogs"))
+      : [];
+    const newBlogs = blogs.map((blog) => {
+      if (blog.id === id) {
+        return {
+          ...blog,
+          isDeleted: true,
+          deletedAt: new Date().toISOString(),
+        };
+      }
+      return blog;
+    });
+    addActivity({
+      action: "DELETED",
+      title: newBlogs.find((blog) => blog.id === id)?.title,
+    });
+
+    localStorage.setItem("blogs", JSON.stringify(newBlogs));
+    setBlogs(newBlogs.filter((blog) => !blog.isDeleted));
+  };
+  const onEditBlog = (id) => {
+    navigate(`/edit-blog/${id}`);
+  };
 
   return (
     <div className="min-h-screen w-full md:px-6 px-4 py-8 bg-slate-50 space-y-4">
@@ -105,7 +133,11 @@ export default function BlogsPage() {
         />
       </div>
       <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
-        <BlogsTable blogs={paginatedBlogs} currentPage={currentPage} />
+        <BlogsTable
+          blogs={paginatedBlogs}
+          currentPage={currentPage}
+          onDeleteBlog={onDeleteBlog}
+        />
         <div className="flex md:flex-row flex-col flex-wrap items-center gap-4 bg-white border-t border-gray-200 py-2 justify-between px-4 text-sm md:text-base text-slate-500">
           <div>
             <p>

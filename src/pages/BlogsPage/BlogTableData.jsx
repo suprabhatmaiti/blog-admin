@@ -1,15 +1,20 @@
 import React from "react";
 import { MdEdit } from "react-icons/md";
 import { IoIosTrash } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 export default function BlogTableData({ blog, onDelete }) {
-  const onDeleteClick = () => {
-    onDelete(blog.id);
-  };
+  const navigate = useNavigate();
 
   const date = blog.publishDate
     ? new Date(blog.publishDate).toLocaleDateString()
     : "";
+  const onDeleteClick = () => {
+    onDelete(blog.id);
+  };
+  const onEditClick = () => {
+    navigate(`/edit-blog/${blog.id}`);
+  };
 
   return (
     <tr className="hover:bg-slate-50/80 transition-colors group  ">
@@ -46,7 +51,10 @@ export default function BlogTableData({ blog, onDelete }) {
       <td className="px-6 py-4 text-slate-500">{date}</td>
       <td className="px-6 py-4 text-right">
         <div className="flex justify-end gap-1 opacity-60 group-hover:opacity-100">
-          <button className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+          <button
+            onClick={onEditClick}
+            className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+          >
             <MdEdit size={20} />
           </button>
           <button

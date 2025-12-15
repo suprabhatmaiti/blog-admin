@@ -2,26 +2,13 @@ import React from "react";
 import { IoIosSearch } from "react-icons/io";
 import BlogTableData from "./BlogTableData";
 
-export default function BlogsTable({ blogs }) {
-  const onDeleteBlog = (id) => {
-    const blogs = localStorage.getItem("blogs")
-      ? JSON.parse(localStorage.getItem("blogs"))
-      : [];
-    const newBlogs = blogs.map((blog) => {
-      if (blog.id === id) {
-        return {
-          ...blog,
-          isDeleted: true,
-          deletedAt: new Date().toISOString(),
-        };
-      }
-      return blog;
-    });
-    localStorage.setItem("blogs", JSON.stringify(newBlogs));
+export default function BlogsTable({ blogs, onDeleteBlog }) {
+  const onDelete = (id) => {
+    onDeleteBlog(id);
   };
 
   const TableData = blogs.map((blog) => {
-    return <BlogTableData blog={blog} key={blog.id} onDelete={onDeleteBlog} />;
+    return <BlogTableData blog={blog} key={blog.id} onDelete={onDelete} />;
   });
 
   return (
