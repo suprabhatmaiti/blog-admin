@@ -5,7 +5,7 @@
 | Category             | Status          | Details                                                             |
 | :------------------- | :-------------- | :------------------------------------------------------------------ |
 | **Live Demo**        | [Vercel Link]   | https://blog-admin-three-blue.vercel.app/                           |
-| **Demo Video**       | [Required Link] | **[PASTE YOUR LOOM/YOUTUBE VIDEO LINK HERE]** (3-5 mins, on-camera) |
+| **Demo Video**       | [Loom Link] |  |
 | **Data Persistence** | LocalStorage    | Used for all blog and activity data storage.                        |
 
 ---
