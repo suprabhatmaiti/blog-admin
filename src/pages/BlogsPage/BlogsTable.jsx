@@ -38,7 +38,7 @@ export default function BlogsTable({ blogs, onDeleteBlog }) {
                   <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center mb-3">
                     <IoIosSearch size={20} />
                   </div>
-                  <p>No blogs found matching your filters.</p>
+                  <p>There is no blog to display.</p>
                 </div>
               </td>
             </tr>

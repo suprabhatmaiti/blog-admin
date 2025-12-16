@@ -8,7 +8,7 @@ export default function Navbar() {
     if (pathname === "/blogs") return "Blogs";
     if (pathname === "/add-blog") return "Add Blog";
     if (pathname.includes("edit-blog")) return "Edit Blog";
-    return "Page";
+    return "Page Not Found";
   };
 
   const { pathname } = useLocation();

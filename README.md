@@ -10,7 +10,7 @@
 
 ---
 
-## 🛠️ Technical Stack & Architecture
+## Technical Stack & Architecture
 
 This project is a single-page application (SPA) built using **React** with **Vite** and styled using **Tailwind CSS**. The architecture is designed for scalability and maintainability, strictly adhering to all technical constraints.
 
@@ -23,7 +23,7 @@ This project is a single-page application (SPA) built using **React** with **Vit
 
 ---
 
-## 🧠 Assessment Logic Implementation
+## Assessment Logic Implementation
 
 This section provides the required explanation for the implemented features and chosen Brain Tasks.
 
