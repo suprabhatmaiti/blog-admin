@@ -2,11 +2,11 @@
 
 ### Edwid Tech PVT LTD Assessment Submission
 
-| Category             | Status          | Details                                                             |
-| :------------------- | :-------------- | :------------------------------------------------------------------ |
-| **Live Demo**        | [Vercel Link]   | https://blog-admin-three-blue.vercel.app/                           |
-| **Demo Video**       | [Loom Link] |  |
-| **Data Persistence** | LocalStorage    | Used for all blog and activity data storage.                        |
+| Category             | Status        | Details                                      |
+| :------------------- | :------------ | :------------------------------------------- | ----------------------------------------------------------- |
+| **Live Demo**        | [Vercel Link] | https://blog-admin-three-blue.vercel.app/    |
+| **Demo Video**       | [Loom Link]   |                                              | https://www.loom.com/share/296756a4ded046749eb5c7793cba8a7d |
+| **Data Persistence** | LocalStorage  | Used for all blog and activity data storage. |
 
 ---
 
