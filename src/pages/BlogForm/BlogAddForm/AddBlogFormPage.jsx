@@ -100,7 +100,7 @@ export default function AddBlogFormPage() {
             Fill the details below to create a new blog.
           </p>
         </div>
-        <div className="flex items-center mb-4 gap-6 mt-4">
+        <div className="md:flex items-center hidden mb-4 gap-6 mt-4">
           <Button
             onClick={onCancelCLick}
             variant="secondary"
@@ -119,8 +119,8 @@ export default function AddBlogFormPage() {
           </Button>
         </div>
       </div>
-      <div className="flex flex-col md:flex gap-8">
-        <div>
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex-1">
           <BlogTitleDesc
             onChange={handleChange}
             titleValue={formData.title}
@@ -128,7 +128,7 @@ export default function AddBlogFormPage() {
           />
         </div>
 
-        <div className="w-full flex flex-col gap-6 ">
+        <div className="w-full flex flex-col gap-6 flex-1">
           <div>
             <ImageHandler
               error={imageError}
@@ -137,7 +137,7 @@ export default function AddBlogFormPage() {
               onChange={handleImageChange}
             />
           </div>
-          <div className="bg-white w-full p-8 rounded-xl px-8">
+          <div className="bg-white p-8 rounded-xl px-8">
             <PublishingDetails
               publish={formData.publish}
               setPublish={togglePublish}
@@ -147,6 +147,24 @@ export default function AddBlogFormPage() {
             />
           </div>
         </div>
+      </div>
+      <div className="flex items-center md:hidden justify-end  mb-4 gap-6 mt-4">
+        <Button
+          onClick={onCancelCLick}
+          variant="secondary"
+          disabled={!isFormChanged || isSaving}
+          className="rounded-full gap-2 "
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={handleSave}
+          disabled={!isFormChanged || isSaving}
+          className="rounded-full gap-2"
+        >
+          <FaRegSave />
+          Create Blog
+        </Button>
       </div>
     </div>
   );

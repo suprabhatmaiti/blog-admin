@@ -19,22 +19,26 @@ export default function BlogTableData({ blog, onDelete }) {
   };
 
   return (
-    <tr className="hover:bg-slate-50/80 transition-colors group  ">
-      <td className="px-6 py-4 font-medium text-slate-900">{blog.title}</td>
-      <td className="px-6 py-4 text-slate-500">
+    <tr className="hover:bg-slate-50/80 transition-colors group text-center align-middle">
+      <td className="px-6 py-4 font-medium text-slate-900 text-left align-middle">
+        {blog.title}
+      </td>
+      <td className="px-6 py-4 text-slate-500 align-middle">
         <span className="px-2 py-1 bg-slate-100 rounded text-xs font-medium text-slate-600">
           {blog.category}
         </span>
       </td>
-      <td className="px-6 py-4 text-slate-500 flex items-center gap-2">
-        <div className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs flex items-center justify-center font-bold">
-          {blog.author.charAt(0)}
+      <td className="px-6 py-4 text-slate-500 align-middle">
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs flex items-center justify-center font-bold">
+            {blog.author.charAt(0)}
+          </div>
+          {blog.author}
         </div>
-        {blog.author}
       </td>
-      <td className="px-6 py-4">
+      <td className="px-6 py-4 align-middle">
         <span
-          className={`px-2.5 py-1 rounded-full text-xs font-semibold border flex w-fit items-center gap-1.5
+          className={`px-2.5 py-1 rounded-full text-xs font-semibold border inline-flex items-center gap-1.5
                       ${
                         blog.publish == true
                           ? "bg-emerald-50 text-emerald-700 border-emerald-200"
@@ -47,11 +51,10 @@ export default function BlogTableData({ blog, onDelete }) {
               blog.publish == true ? "bg-emerald-500" : "bg-amber-500"
             }`}
           ></span>
-          {blog.publish}
         </span>
       </td>
-      <td className="px-6 py-4 text-slate-500">{date}</td>
-      <td className="px-6 py-4 text-right">
+      <td className="px-6 py-4 text-slate-500 align-middle">{date}</td>
+      <td className="px-6 py-4 text-right align-middle">
         <div className="flex justify-end gap-1 opacity-60 group-hover:opacity-100">
           <button
             onClick={onEditClick}

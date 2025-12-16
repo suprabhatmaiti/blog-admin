@@ -94,7 +94,7 @@ export default function PublishingDetails({
           <button
             onClick={togglePublishStatus}
             className={`relative h-6 w-11 inline-flex rounded-full focus:outline-none cursor-pointer ${
-              publish ? "bg-indigo-600" : "bg-slate-300"
+              publish ? "bg-green-600" : "bg-slate-300"
             }`}
           >
             <span

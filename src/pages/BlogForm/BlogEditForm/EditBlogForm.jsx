@@ -112,14 +112,14 @@ export default function EditBlogFormPage() {
         <div>
           <h1 className="text-3xl font-bold text-slate-900">Edit Blog</h1>
           <p className="text-slate-500 text-base mt-1 ">
-            Change the details below to edit your blog.
+            Change the below details to edit the blog.
           </p>
         </div>
-        <div className="flex items-center mb-4 gap-6 mt-4">
+        <div className="md:flex items-center hidden mb-4 gap-6 mt-4">
           <Button
             onClick={onCancelClick}
             variant="secondary"
-            className="rounded-full gap-2"
+            className="rounded-full gap-2 "
           >
             Cancel
           </Button>
@@ -133,8 +133,8 @@ export default function EditBlogFormPage() {
           </Button>
         </div>
       </div>
-      <div className="md:flex gap-8">
-        <div>
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex-1">
           <BlogTitleDesc
             onChange={handleChange}
             titleValue={formData.title}
@@ -142,7 +142,7 @@ export default function EditBlogFormPage() {
           />
         </div>
 
-        <div className="w-full flex flex-col gap-6 ">
+        <div className="w-full flex flex-col gap-6 flex-1">
           <div>
             <ImageHandler
               error={imageError}
@@ -151,7 +151,7 @@ export default function EditBlogFormPage() {
               onChange={handleImageChange}
             />
           </div>
-          <div className="bg-white w-full p-8 rounded-xl px-8">
+          <div className="bg-white p-8 rounded-xl px-8">
             <PublishingDetails
               publish={formData.publish}
               setPublish={togglePublish}
@@ -161,6 +161,23 @@ export default function EditBlogFormPage() {
             />
           </div>
         </div>
+      </div>
+      <div className="flex items-center md:hidden justify-end  mb-4 gap-6 mt-4">
+        <Button
+          onClick={onCancelClick}
+          variant="secondary"
+          className="rounded-full gap-2 "
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={handleUpdate}
+          disabled={!isFormChanged || isSaving}
+          className="rounded-full gap-2"
+        >
+          <FaRegSave />
+          Save Changes
+        </Button>
       </div>
     </div>
   );

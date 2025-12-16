@@ -13,10 +13,12 @@ export default function BlogsTable({ blogs, onDeleteBlog }) {
 
   return (
     <div className="overflow-x-auto ">
-      <table className="w-full text-left text-base">
+      <table className="w-full text-center text-base">
         <thead className="bg-slate-50/50 border-b border-slate-200">
           <tr>
-            <th className="px-6 py-4 font-semibold text-slate-600">Title</th>
+            <th className="px-6 py-4 font-semibold text-slate-600 text-left">
+              Title
+            </th>
             <th className="px-6 py-4 font-semibold text-slate-600">Category</th>
             <th className="px-6 py-4 font-semibold text-slate-600">Author</th>
             <th className="px-6 py-4 font-semibold text-slate-600">Status</th>

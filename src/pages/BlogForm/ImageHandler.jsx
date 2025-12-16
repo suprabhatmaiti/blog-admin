@@ -28,7 +28,7 @@ export default function ImageHandler({ value, onChange, error, setError }) {
           <div className="relative w-full rounded-lg overflow-hidden shadow-md">
             <button
               onClick={onCancelImage}
-              className="absolute top-2 right-2 bg-indigo-600 text-white px-2 py-1 cursor-pointer text-sm rounded"
+              className="absolute top-2 right-2 bg-red-200 text-red-500 px-2 py-1 cursor-pointer text-sm rounded hover:bg-red-500 hover:text-white"
             >
               X
             </button>
