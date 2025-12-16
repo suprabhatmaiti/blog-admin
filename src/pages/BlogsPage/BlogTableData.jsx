@@ -5,12 +5,26 @@ import { useNavigate } from "react-router-dom";
 
 export default function BlogTableData({ blog, onDelete }) {
   const navigate = useNavigate();
-  function isValidDate(date) {
-    return date instanceof Date && !isNaN(date.getTime());
-  }
-  const date = isValidDate(new Date(blog.publishDate))
-    ? new Date(blog.publishDate).toLocaleDateString()
-    : blog.publishDate;
+  
+  const getDisplayDate = () => {
+    if (!blog.publish) {
+      return "Not published yet";
+    }
+    
+    if (!blog.publishDate) {
+      return "Just now";
+    }
+    
+    const publishDate = new Date(blog.publishDate);
+    if (isNaN(publishDate.getTime())) {
+      return "Invalid date";
+    }
+    
+    return publishDate.toLocaleDateString();
+  };
+
+  const date = getDisplayDate();
+  
   const onDeleteClick = () => {
     onDelete(blog.id);
   };
