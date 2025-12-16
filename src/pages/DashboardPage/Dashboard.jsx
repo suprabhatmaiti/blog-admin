@@ -13,8 +13,6 @@ export default function Dashboard() {
   const draft = filteredBlogs.filter((blog) => !blog.publish);
 
   const activities = getActivities();
-  console.log(activities);
-
   const renderActivity = activities.map((activity) => {
     return <ActivityList activity={activity} key={activity.id} />;
   });
