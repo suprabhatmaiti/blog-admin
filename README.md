@@ -1,4 +1,4 @@
-# 🚀 Blog Admin Dashboard (Frontend Developer Assessment)
+# Blog Admin Dashboard (Frontend Developer Assessment)
 
 ### Edwid Tech PVT LTD Assessment Submission
 
@@ -62,7 +62,7 @@ This section provides the required explanation for the implemented features and 
 
 ---
 
-## 📂 Folder Architecture Structure
+## Folder Architecture Structure
 
 The repository follows a clean, component-driven structure with separation of concerns:
 
@@ -84,7 +84,7 @@ src/
 
 ---
 
-## ⚙️ How to Run the Project Locally
+## How to Run the Project Locally
 
 1.  **Clone the repository:**
 
